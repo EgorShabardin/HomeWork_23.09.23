@@ -19,45 +19,31 @@ namespace Решение_задач
             // Задание №1. Программа получает 10 чисел и определяет, является ли эта последовательность возрастающей.
             Console.WriteLine("{0,110}", "ЗАДАНИЕ №1. ПРОГРАММА ПОЛУЧАЕТ 10 ЧИСЕЛ И ОПРЕДЕЛЯЕТ, ЯВЛЯЕТСЯ ЛИ ЭТА ПОСЛЕДОВАТЕЛЬНОСЬ ВОЗРАСТАЮЩЕЙ\n");
 
-            string[] userSequence;
-            double[] numbersSequence = new double[10];
+            int[] numbersSequence = new int[10];
             bool result = true;
+            Random randomNumber = new Random();
 
-            Console.Write("Введите последовательность из 10 чисел, разделяя их пробелом: ");
-            userSequence = Console.ReadLine().Split(new char[] {' '}, StringSplitOptions.RemoveEmptyEntries);
+            Console.Write("Получилась последовательность: ");
 
-            if (userSequence.Length == 10)
+            for (int i = 0; i < numbersSequence.Length; i++)
             {
-                for (int i = 0; i < userSequence.Length; i++)
-                {
-                    result &= double.TryParse(userSequence[i], out numbersSequence[i]);
-                }
+                numbersSequence[i] = randomNumber.Next(50);
+                Console.Write(numbersSequence[i] + " ");
+            }
 
-                if (result)
+            for (int i = 0; i < (numbersSequence.Length - 1); i++)
+            {
+                if (numbersSequence[i] > numbersSequence[i+1])
                 {
-                    for (int i = 0; i < (numbersSequence.Length - 1); i++)
-                    {
-                        if (numbersSequence[i] > numbersSequence[i+1])
-                        {
-                            Console.WriteLine($"Последовательность не является возрастающей. Первое число, нарушающее последовательнось, - это число {numbersSequence[i+1]} под номером {i+2}");
-                            result = false;
-                            break;
-                        }
-                    }
-
-                    if (result)
-                    {
-                        Console.WriteLine("Последовательнось является возрастающей");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Необходимо вводить числа. Для дробных чисел необходимо использовать запятую, а не точку!");
+                    Console.WriteLine($"\nПоследовательность не является возрастающей. Первое число, нарушающее последовательнось, - это число {numbersSequence[i+1]} под номером {i+2}");
+                    result = false;
+                    break;
                 }
             }
-            else
+
+            if (result)
             {
-                Console.WriteLine("Вы ввели не 10 чисел или введенные данные не являются числами! Числа необходимо разделять пробелом!");
+                Console.WriteLine("\nПоследовательнось является возрастающей");
             }
 
 
@@ -163,6 +149,7 @@ namespace Решение_задач
                     break;
             }
 
+
             // Задание №4. Программа получает число и выводит день недели.
             Console.WriteLine();
             Console.WriteLine();
@@ -225,21 +212,24 @@ namespace Решение_задач
             Console.WriteLine();
             Console.WriteLine("{0,110}", "ЗАДАНИЕ №5. ПРОГРАММА ПОЛУЧАЕТ СТРОКУ, СОДЕРЖАЩУЮ ТОВАРЫ, И ПОДСЧИТЫВАЕТ КОЛИЧЕСТВО НЕКОТОРЫХ ИЗ НИХ\n");
 
-            string[] products;
+            string[] products = { "barbie doll", "BarBie DOLL", "doll", "Barbie", "HellO KittY", "Hello", "KITTY" };
             int count = 0;
 
-            Console.Write("Введите товары через запятую: ");
-            products = Console.ReadLine().ToLower().Split(new string[] {", ", ","}, StringSplitOptions.RemoveEmptyEntries);
+            Console.Write("Строка: ");
 
-            foreach (string item in products)
+            for (int i = 0; i < products.Length; i++)
             {
+                Console.Write(products[i] + ", ");
+
+                string item = products[i].ToLower();
+
                 if ((item == "hello kitty") || (item == "barbie doll"))
                 {
                     count++;
                 }
             }
 
-            Console.WriteLine($"В введенной строке есть {count} Hello Kitty или Barbie doll");
+            Console.WriteLine($"\nВ строке есть {count} Hello Kitty или Barbie doll");
         }
     }
 }
